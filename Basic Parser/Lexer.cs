@@ -64,6 +64,14 @@ namespace Basic_Parser
                         tokens.Add(new Token { Type = Token.TokenTypes.Root });
                         break;
 
+                    case '(':
+                        tokens.Add(new Token { Type = Token.TokenTypes.LParen });
+                        break;
+
+                    case ')':
+                        tokens.Add(new Token { Type = Token.TokenTypes.RParen });
+                        break;
+
                     default:
                         //Check for numeric value
                         if (Char.IsDigit(this.current()))

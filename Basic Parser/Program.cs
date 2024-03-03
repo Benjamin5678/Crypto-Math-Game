@@ -1,18 +1,14 @@
 ﻿using Basic_Parser;
+using Newtonsoft.Json;
 
 Lexer lexer = new Lexer();
 
-string expression = "3 ^/9 * 5L7R2  +-3  ";
+string expression = "10 * ( 10 + 3 * 3 - 2 )";
 List<Token> tokens = lexer.tokenize(expression);
 
-foreach (Token token in tokens)
-{
-    Console.Write(token.Type);
+Parser parser = new Parser(tokens);
 
-    if (token.Type == Token.TokenTypes.Integer)
-    {
-        Console.Write($": {token.Value}");
-    }
+Token ast = parser.parse();
 
-    Console.WriteLine();
-}
+string json = JsonConvert.SerializeObject(ast);
+Console.WriteLine(JsonConvert.SerializeObject(JsonConvert.DeserializeObject(json), Formatting.Indented));
