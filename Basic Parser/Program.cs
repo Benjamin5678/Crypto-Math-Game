@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 Lexer lexer = new Lexer();
 
-string expression = "10 * ( 10 + 3 * 3 - 2 )";
+string expression = "1 2 3 4 5";
 List<Token> tokens = lexer.tokenize(expression);
 
 Parser parser = new Parser(tokens);

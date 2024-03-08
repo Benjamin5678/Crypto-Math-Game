@@ -21,7 +21,7 @@ namespace Basic_Parser
             Value = calculateValue();
         }
 
-        int calculateValue()
+        double calculateValue()
         {
             switch (Operator)
             {
@@ -36,6 +36,22 @@ namespace Basic_Parser
 
                 case TokenTypes.Divide:
                     return lhs.Value / rhs.Value;
+
+                case TokenTypes.DividedInto:
+                    return rhs.Value / lhs.Value;
+
+                case TokenTypes.Exponent:
+                    return Math.Pow(lhs.Value, rhs.Value);
+
+                case TokenTypes.Root:
+                    return Math.Pow(rhs.Value, 1/lhs.Value);
+
+                case TokenTypes.Underscore:
+                    if ((10 * lhs.Value + rhs.Value) > 999)
+                    {
+                        throw new Exception("Tried to combine a 4 digit number with underscores against the rules.");
+                    }
+                    return 10 * lhs.Value + rhs.Value;
 
                 default:
                     throw new NotImplementedException();

@@ -14,9 +14,10 @@ namespace Basic_Parser
             Minus,
             Multiply,
             Divide,
-            Exponent,
             DividedInto,
+            Exponent,
             Root,
+            Underscore,
             LParen,
             RParen,
             BinaryOperator,
@@ -25,6 +26,6 @@ namespace Basic_Parser
         }
 
         public TokenTypes Type { get; set; }
-        public int Value { get; set; }
+        public double Value { get; set; }
     }
 }

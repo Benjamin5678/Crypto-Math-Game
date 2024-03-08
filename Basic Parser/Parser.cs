@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Formats.Tar;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -66,11 +67,29 @@ namespace Basic_Parser
         // multiplecation/division
         Token parseTerm()
         {
+            Token leftHandSide = this.parsePower();
+
+            while (this.current().Type == Token.TokenTypes.Multiply || this.current().Type == Token.TokenTypes.Divide || this.current().Type == Token.TokenTypes.DividedInto)
+            {
+                Token.TokenTypes ttype = this.current().Type; // I dont know why the other ones arent like this, this is probably a bad workaround
+
+                this.eatToken(ttype);
+                Token rightHandSide = this.parsePower();
+
+                leftHandSide = new BinaryOperator(leftHandSide, rightHandSide, ttype);
+            }
+
+            return leftHandSide;
+        }
+
+        //powers
+        Token parsePower()
+        {
             Token leftHandSide = this.parseFactor();
 
-            while (this.current().Type == Token.TokenTypes.Multiply || this.current().Type == Token.TokenTypes.Divide)
+            while (this.current().Type == Token.TokenTypes.Exponent || this.current().Type == Token.TokenTypes.Root)
             {
-                Token.TokenTypes ttype = (this.current().Type == Token.TokenTypes.Multiply) ? Token.TokenTypes.Multiply : Token.TokenTypes.Divide;
+                Token.TokenTypes ttype = (this.current().Type == Token.TokenTypes.Exponent) ? Token.TokenTypes.Exponent : Token.TokenTypes.Root;
 
                 this.eatToken(ttype);
                 Token rightHandSide = this.parseFactor();

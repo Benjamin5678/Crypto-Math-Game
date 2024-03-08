@@ -85,7 +85,7 @@ namespace Basic_Parser
                             }
                             this.cursor--;
 
-                            tokens.Add(new Token { Type = Token.TokenTypes.Integer, Value = Convert.ToInt32(strNumber)});
+                            tokens.Add(new Token { Type = Token.TokenTypes.Integer, Value = Convert.ToDouble(strNumber)});
                         }
                         else
                         {
