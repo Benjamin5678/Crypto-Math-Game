@@ -78,9 +78,12 @@ namespace Basic_Parser
                         {
                             string strNumber = "";
 
-                            while (this.cursor < this.stream.Length && Char.IsDigit(this.current()))
+                            while (this.cursor < this.stream.Length && ( Char.IsDigit(this.current()) || this.current() == ' ' || this.current() == '_') )
                             {
-                                strNumber += this.current().ToString();
+                                if (Char.IsDigit(this.current()))
+                                {
+                                    strNumber += this.current().ToString();
+                                }
                                 this.cursor++;
                             }
                             this.cursor--;

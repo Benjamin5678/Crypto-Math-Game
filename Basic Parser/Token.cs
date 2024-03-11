@@ -17,7 +17,6 @@ namespace Basic_Parser
             DividedInto,
             Exponent,
             Root,
-            Underscore,
             LParen,
             RParen,
             BinaryOperator,
