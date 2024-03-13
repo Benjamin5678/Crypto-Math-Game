@@ -9,8 +9,8 @@ namespace Basic_Parser
 {
     internal class Parser
     {
-        List<Token> tokens;
-        int cursor = 0;
+        public List<Token> tokens;
+        public int cursor = 0;
 
         public Parser(List<Token> tokens)
         {
