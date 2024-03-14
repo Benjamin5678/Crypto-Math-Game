@@ -3,8 +3,6 @@ using Newtonsoft.Json;
 
 Game game = new Game();
 
-string expression = "(1 + 2) * 3 L 4_ 5";
-
 game.generateNumbers();
 foreach(var number in game.numbers)
 {
@@ -13,3 +11,17 @@ foreach(var number in game.numbers)
 
 game.generateTarget();
 Console.WriteLine(game.target);
+
+Console.Write("Input an answer: ");
+string input = Console.ReadLine();
+
+bool win = game.validateInput(input);
+
+if (win)
+{
+    Console.WriteLine("You win!");
+}
+else
+{
+    Console.WriteLine("You lost!");
+}
