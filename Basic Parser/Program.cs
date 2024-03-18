@@ -1,27 +1,43 @@
 ﻿using Basic_Parser;
 using Newtonsoft.Json;
+using Spectre.Console;
 
 Game game = new Game();
 
+Console.WriteLine("Crypto! Math Game");
+
+bool easyMode = false;
+Console.Write("Use easy mode? (enter yes) > ");
+if (Console.ReadLine() == "yes") { easyMode = true; }
+
 game.generateNumbers();
+Table numberTable = new Table();
 foreach(var number in game.numbers)
 {
-    Console.WriteLine(number.Value);
+    numberTable.AddColumn(number.Value.ToString());
 }
+numberTable.AddColumn("=");
 
-game.generateTarget();
-Console.WriteLine(game.target);
+game.generateTarget(easyMode);
+numberTable.AddColumn(game.target.ToString());
 
-Console.Write("Input an answer: ");
-string input = Console.ReadLine();
+AnsiConsole.Write(numberTable);
 
-bool win = game.validateInput(input);
-
-if (win)
+while (true)
 {
-    Console.WriteLine("You win!");
-}
-else
-{
-    Console.WriteLine("You lost!");
+    Console.Write("Input an answer: ");
+    string input = Console.ReadLine();
+
+    bool correct = game.validateInput(input);
+
+    if (correct)
+    {
+        Console.WriteLine("Correct!");
+    }
+    else
+    {
+        Console.WriteLine("Incorrect or already found.");
+    }
+
+    Console.WriteLine($"Solutions found: {game.solutionsFound.Count}");
 }

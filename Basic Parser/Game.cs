@@ -15,6 +15,8 @@ namespace Basic_Parser
         public List<Token> numbers = new List<Token>();
         public int target;
 
+        public List<Token> solutionsFound = new List<Token>();
+
         public bool validateInput(string input)
         {
             List<Token> tokens = lexer.tokenize(input);
@@ -33,15 +35,11 @@ namespace Basic_Parser
                 }
             }
 
-            Console.WriteLine("Same Numbers");
-
             //Same ammount of numbers?
             if ( i != numbers.Count)
             {
                 return false;
             }
-
-            Console.WriteLine("Same number of numbers");
 
             //Evaluation is same?
             if ( evaluate(tokens) != target)
@@ -49,7 +47,16 @@ namespace Basic_Parser
                 return false;
             }
 
-            Console.WriteLine("Evaluation is equal");
+            //Solution found!
+            
+            //Add solution
+            Parser parser = new Parser(tokens);
+            Token ast = parser.parse();
+            if (solutionsFound.Contains(ast)) //Is solution new?
+            {
+                return false;
+            }
+            solutionsFound.Add(ast);
 
             return true;
         }
@@ -63,14 +70,21 @@ namespace Basic_Parser
             }
         }
 
-        public void generateTarget() //I love hardcoding
+        public void generateTarget(bool easyMode = false)
         {
             List<Token> exampleExpression = new List<Token>();
 
             for (int i = 0; i < numbers.Count - 1; i++)
             {
+                int difficulty = 8; //The ammount of operators used. 8 is all. 2 is + and -. See Token.TokenTypes
+
+                if (easyMode)
+                {
+                    difficulty = 2;
+                }
+
                 exampleExpression.Add(numbers[i]);
-                exampleExpression.Add(new Token { Type = (Token.TokenTypes)rand.Next(0, 7) }); //add random operator, see Token.TokenTypes indexes 0 through 6
+                exampleExpression.Add(new Token { Type = (Token.TokenTypes)rand.Next(0, difficulty) }); //add random operator
             }
             exampleExpression.Add(numbers[numbers.Count - 1]);
             exampleExpression.Add(new Token { Type = Token.TokenTypes.EOF });
@@ -83,14 +97,12 @@ namespace Basic_Parser
             }
             catch (OverflowException) //apparently this happens sometimes
             {
-                Console.WriteLine("Overflow... Regenerating");
                 generateTarget();
             }
             
 
             if ( target != evaluation || evaluation > 60 || evaluation < 1) //make sure puzzle is a reasonable number
             {
-                Console.WriteLine("Regenerating");
                 generateTarget();
             }
         }

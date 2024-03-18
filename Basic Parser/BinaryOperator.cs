@@ -46,6 +46,9 @@ namespace Basic_Parser
                 case TokenTypes.Root:
                     return Math.Pow(rhs.Value, 1/lhs.Value);
 
+                case TokenTypes.Underscore:
+                    return lhs.Value * 10 + rhs.Value;
+
                 default:
                     throw new NotImplementedException();
             }

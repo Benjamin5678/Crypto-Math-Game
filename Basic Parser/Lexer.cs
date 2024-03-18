@@ -64,6 +64,10 @@ namespace Basic_Parser
                         tokens.Add(new Token { Type = Token.TokenTypes.Root });
                         break;
 
+                    case '_':
+                        tokens.Add(new Token { Type = Token.TokenTypes.Underscore });
+                        break;
+
                     case '(':
                         tokens.Add(new Token { Type = Token.TokenTypes.LParen });
                         break;
@@ -78,7 +82,7 @@ namespace Basic_Parser
                         {
                             string strNumber = "";
 
-                            while (this.cursor < this.stream.Length && ( Char.IsDigit(this.current()) || this.current() == ' ' || this.current() == '_') )
+                            while (this.cursor < this.stream.Length && Char.IsDigit(this.current()))
                             {
                                 if (Char.IsDigit(this.current()))
                                 {

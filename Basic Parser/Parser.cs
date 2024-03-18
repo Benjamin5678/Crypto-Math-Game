@@ -105,9 +105,22 @@ namespace Basic_Parser
         {
             if (this.current().Type == Token.TokenTypes.Integer)
             {
-                Token literal = new Token { Type = Token.TokenTypes.Integer, Value = this.current().Value };
-                this.eatToken(Token.TokenTypes.Integer);
-                return literal;
+                if (this.peek().Type == Token.TokenTypes.Underscore)
+                {
+                    Token lhs = new Token { Type = Token.TokenTypes.Integer, Value = this.current().Value };
+                    this.eatToken(Token.TokenTypes.Integer);
+                    this.eatToken(Token.TokenTypes.Underscore);
+                    Token rhs = new Token { Type = Token.TokenTypes.Integer, Value = this.current().Value };
+                    this.eatToken(Token.TokenTypes.Integer);
+
+                    return new BinaryOperator(lhs, rhs, Token.TokenTypes.Underscore);
+                }
+                else
+                {
+                    Token literal = new Token { Type = Token.TokenTypes.Integer, Value = this.current().Value };
+                    this.eatToken(Token.TokenTypes.Integer);
+                    return literal;
+                }
             }
 
             //paranthesis
