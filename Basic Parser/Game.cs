@@ -27,7 +27,7 @@ namespace Basic_Parser
             {
                 if(t.Type == Token.TokenTypes.Integer)
                 {
-                    if (numbers.Count > (i + 1) || t.Value != numbers[i].Value)
+                    if (numbers.Count < (i + 1) || t.Value != numbers[i].Value)
                     {
                         return false;
                     }
@@ -40,6 +40,8 @@ namespace Basic_Parser
             {
                 return false;
             }
+
+            Console.WriteLine( evaluate(numbers) );
 
             //Evaluation is same?
             if ( evaluate(tokens) != target)

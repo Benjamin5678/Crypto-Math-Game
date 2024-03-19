@@ -53,5 +53,10 @@ namespace Basic_Parser
                     throw new NotImplementedException();
             }
         }
+
+        public static bool treeIsEqual (BinaryOperator node1, BinaryOperator node2)
+        {
+            
+        }
     }
 }
