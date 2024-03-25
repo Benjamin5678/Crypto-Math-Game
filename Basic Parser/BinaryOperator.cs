@@ -56,7 +56,8 @@ namespace Basic_Parser
 
         public static bool treeIsEqual (BinaryOperator node1, BinaryOperator node2)
         {
-            
+            //To do!
+            return false;
         }
     }
 }

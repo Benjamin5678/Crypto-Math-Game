@@ -17,6 +17,13 @@ namespace Basic_Parser
 
         public List<Token> solutionsFound = new List<Token>();
 
+        public enum difficulties
+        {
+            easy = 2, //Plus and Minus
+            medium = 4, //Multiply and Divide
+            hard = 8 //
+        }
+
         public bool validateInput(string input)
         {
             List<Token> tokens = lexer.tokenize(input);
@@ -54,9 +61,11 @@ namespace Basic_Parser
             //Add solution
             Parser parser = new Parser(tokens);
             Token ast = parser.parse();
-            if (solutionsFound.Contains(ast)) //Is solution new?
+            foreach (Token solution in solutionsFound)
             {
-                return false;
+                if (BinaryOperator.treeIsEqual((BinaryOperator) solution, (BinaryOperator) ast)){
+                    return false;
+                }
             }
             solutionsFound.Add(ast);
 
@@ -72,21 +81,16 @@ namespace Basic_Parser
             }
         }
 
-        public void generateTarget(bool easyMode = false)
+        public void generateTarget(difficulties difficulty)
         {
             List<Token> exampleExpression = new List<Token>();
 
+            int diff = (int)difficulty; //The ammount of operators used. 8 is all. 2 is + and -. See Token.TokenTypes
+
             for (int i = 0; i < numbers.Count - 1; i++)
             {
-                int difficulty = 8; //The ammount of operators used. 8 is all. 2 is + and -. See Token.TokenTypes
-
-                if (easyMode)
-                {
-                    difficulty = 2;
-                }
-
                 exampleExpression.Add(numbers[i]);
-                exampleExpression.Add(new Token { Type = (Token.TokenTypes)rand.Next(0, difficulty) }); //add random operator
+                exampleExpression.Add(new Token { Type = (Token.TokenTypes)rand.Next(0, diff) }); //add random operator
             }
             exampleExpression.Add(numbers[numbers.Count - 1]);
             exampleExpression.Add(new Token { Type = Token.TokenTypes.EOF });
@@ -99,13 +103,13 @@ namespace Basic_Parser
             }
             catch (OverflowException) //apparently this happens sometimes
             {
-                generateTarget();
+                generateTarget(difficulty);
             }
             
 
             if ( target != evaluation || evaluation > 60 || evaluation < 1) //make sure puzzle is a reasonable number
             {
-                generateTarget();
+                generateTarget(difficulty);
             }
         }
 
