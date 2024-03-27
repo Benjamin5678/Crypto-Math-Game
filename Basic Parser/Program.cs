@@ -13,22 +13,8 @@ Console.WriteLine("Crypto! Math Game");
 Console.Write("Which difficulty? (easy, medium, hard) -> ");
 
 input = Console.ReadLine();
-Game.difficulties difficulty;
 
-switch (input)
-{
-    case "easy":
-        difficulty = Game.difficulties.easy;
-        break;
-    case "medium":
-        difficulty = Game.difficulties.medium;
-        break;
-    case "hard":
-        difficulty = Game.difficulties.hard;
-        break;
-    default:
-        throw new Exception("invalid difficulty given");
-}
+string difficulty = input;
 
 
 //Generate Puzzle
@@ -40,7 +26,7 @@ foreach (var number in game.numbers)
 }
 numberTable.AddColumn("=");
 
-game.generateTarget(difficulty);
+game.generateTarget(game.difficulties[difficulty]);
 numberTable.AddColumn(game.target.ToString());
 
 AnsiConsole.Write(numberTable);

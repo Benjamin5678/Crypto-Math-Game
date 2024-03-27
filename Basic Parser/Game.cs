@@ -16,12 +16,34 @@ namespace Basic_Parser
         public int target;
 
         public List<Token> solutionsFound = new List<Token>();
+        int score;
 
-        public enum difficulties
+        public Dictionary<string, int> difficulties = new Dictionary<string, int>()
         {
-            easy = 2, //Plus and Minus
-            medium = 4, //Multiply and Divide
-            hard = 8 //
+            {"easy", 2 },
+            {"medium", 4 },
+            {"easy", 8 }
+        };
+
+        public Dictionary<Token.TokenTypes, int> scoring = new Dictionary<Token.TokenTypes, int>()
+        {
+            {Token.TokenTypes.Plus, 1},
+            {Token.TokenTypes.Minus, 1},
+            {Token.TokenTypes.Multiply, 1},
+            {Token.TokenTypes.Divide, 1},
+            {Token.TokenTypes.DividedInto, 1},
+            {Token.TokenTypes.Exponent, 1},
+            {Token.TokenTypes.Root, 1},
+            {Token.TokenTypes.Underscore, 1},
+            {Token.TokenTypes.LParen, 1},
+            {Token.TokenTypes.RParen, 1},
+            {Token.TokenTypes.Integer, 0},
+            {Token.TokenTypes.EOF, 0},
+        };
+
+        public Game()
+        {
+            //Initialize Game
         }
 
         public bool validateInput(string input)
@@ -69,6 +91,15 @@ namespace Basic_Parser
             }
             solutionsFound.Add(ast);
 
+            //Calculate Points
+            int points = 0;
+            foreach(Token t in tokens)
+            {
+                points += scoring[t.Type];
+            }
+            Console.WriteLine($"{points} points!");
+            score += points;
+
             return true;
         }
 
@@ -81,11 +112,11 @@ namespace Basic_Parser
             }
         }
 
-        public void generateTarget(difficulties difficulty)
+        public void generateTarget(int difficulty)
         {
             List<Token> exampleExpression = new List<Token>();
 
-            int diff = (int)difficulty; //The ammount of operators used. 8 is all. 2 is + and -. See Token.TokenTypes
+            int diff = difficulty; //The ammount of operators used. 8 is all. 2 is + and -. See Token.TokenTypes
 
             for (int i = 0; i < numbers.Count - 1; i++)
             {
