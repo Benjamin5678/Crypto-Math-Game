@@ -63,7 +63,7 @@ namespace Basic_Parser
             Token ast = parser.parse();
             foreach (Token solution in solutionsFound)
             {
-                if (BinaryOperator.treeIsEqual((BinaryOperator) solution, (BinaryOperator) ast)){
+                if (BinaryOperator.treeIsEqual(solution, ast)){
                     return false;
                 }
             }
