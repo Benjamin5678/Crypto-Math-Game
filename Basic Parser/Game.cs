@@ -16,13 +16,13 @@ namespace Basic_Parser
         public int target;
 
         public List<Token> solutionsFound = new List<Token>();
-        int score;
+        public int score;
 
         public Dictionary<string, int> difficulties = new Dictionary<string, int>()
         {
             {"easy", 2 },
             {"medium", 4 },
-            {"easy", 8 }
+            {"hard", 8 }
         };
 
         public Dictionary<Token.TokenTypes, int> scoring = new Dictionary<Token.TokenTypes, int>()

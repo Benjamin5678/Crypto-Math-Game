@@ -50,6 +50,9 @@ while (true)
     }
 
     Console.WriteLine($"Solutions found: {game.solutionsFound.Count}");
+    Console.WriteLine($"Score: {game.score}");
+
+    Console.WriteLine();
 }
 
 
