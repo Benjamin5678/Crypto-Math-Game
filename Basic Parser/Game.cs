@@ -29,12 +29,12 @@ namespace Basic_Parser
         {
             {Token.TokenTypes.Plus, 1},
             {Token.TokenTypes.Minus, 1},
-            {Token.TokenTypes.Multiply, 1},
-            {Token.TokenTypes.Divide, 1},
-            {Token.TokenTypes.DividedInto, 1},
-            {Token.TokenTypes.Exponent, 1},
-            {Token.TokenTypes.Root, 1},
-            {Token.TokenTypes.Underscore, 1},
+            {Token.TokenTypes.Multiply, 2},
+            {Token.TokenTypes.Divide, 2},
+            {Token.TokenTypes.DividedInto, 3},
+            {Token.TokenTypes.Exponent, 5},
+            {Token.TokenTypes.Root, 5},
+            {Token.TokenTypes.Underscore, 5},
             {Token.TokenTypes.LParen, 1},
             {Token.TokenTypes.RParen, 1},
             {Token.TokenTypes.Integer, 0},
@@ -69,8 +69,6 @@ namespace Basic_Parser
             {
                 return false;
             }
-
-            Console.WriteLine( evaluate(numbers) );
 
             //Evaluation is same?
             if ( evaluate(tokens) != target)

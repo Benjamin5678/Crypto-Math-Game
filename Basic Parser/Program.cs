@@ -7,7 +7,20 @@ using Spectre.Console;
 Game game = new Game();
 string input;
 
+//Information
 Console.WriteLine("Crypto! Math Game");
+Console.WriteLine("Simply use the symbols below to make the expression true! It's trickier than it looks.\n");
+Console.WriteLine
+    ("Operators:\n" +
+    "+ | Plus (1 point)\n" +
+    "- | Minus (1 point) (Can't be used to negate first number)\n" +
+    "* | Multiply (2 points)\n" +
+    "/ | Divide (2 points)\n" +
+    "L | Divided Into (3 points) | 5 L 10 = 2\n" +
+    "^ | Exponent (5 points) | 2 ^ 3 = 8\n" +
+    "R | Root (5 point) | 3 R 8 = 2\n" +
+    "_ | Combine Numbers (5 points) | 5 _ 2 = 52\n" +
+    "() | Parenthesis (1 point each) (Can't be used for multiplication)\n");
 
 //Select Difficulty
 Console.Write("Which difficulty? (easy, medium, hard) -> ");
@@ -30,7 +43,6 @@ game.generateTarget(game.difficulties[difficulty]);
 numberTable.AddColumn(game.target.ToString());
 
 AnsiConsole.Write(numberTable);
-
 
 //Main Game Loop
 while (true)
