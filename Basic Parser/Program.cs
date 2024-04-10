@@ -9,7 +9,7 @@ string input;
 
 //Information
 Console.WriteLine("Crypto! Math Game");
-Console.WriteLine("Simply use the symbols below to make the expression true! It's trickier than it looks.\n");
+Console.WriteLine("Simply use the symbols below to make the expression true. It's trickier than it looks!\n");
 Console.WriteLine
     ("Operators:\n" +
     "+ | Plus (1 point)\n" +
