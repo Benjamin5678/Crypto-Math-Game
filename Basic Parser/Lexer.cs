@@ -16,7 +16,7 @@ namespace Basic_Parser
             return this.stream[this.cursor];
         }
 
-        public List<Token> tokenize(string input)
+        public List<Token> tokenize(string input, bool eof = true)
         {
             this.stream = input;
             this.cursor = 0;
@@ -105,7 +105,10 @@ namespace Basic_Parser
                 this.cursor++;
             }
 
-            tokens.Add(new Token { Type = Token.TokenTypes.EOF });
+            if (eof)
+            {
+                tokens.Add(new Token { Type = Token.TokenTypes.EOF });
+            }
 
             return tokens;
         }

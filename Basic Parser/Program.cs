@@ -22,24 +22,50 @@ Console.WriteLine
     "_ | Combine Numbers (5 points) | 5 _ 2 = 52\n" +
     "() | Parenthesis (1 point each) (Can't be used for multiplication)\n");
 
-//Select Difficulty
-Console.Write("Which difficulty? (easy, medium, hard) -> ");
-
+Console.Write("Choose mode: custom *generated -> ");
 input = Console.ReadLine();
 
-string difficulty = input;
+if (input == "custom")
+{
+    Console.WriteLine("Custom Mode:");
 
+    //Numbers
+    Lexer lexer = new Lexer();
 
-//Generate Puzzle
-game.generateNumbers();
+    Console.Write("Enter the numbers, seperated by spaces -> ");
+    input = Console.ReadLine();
+    
+    List<Token> numbers = lexer.tokenize(input, false);
+    game.numbers = numbers;
+
+    //Target
+    Console.Write("Enter the target -> ");
+    input = Console.ReadLine();
+
+    game.target = Convert.ToInt32(input);
+}
+else
+{
+    Console.WriteLine("Generated mode:");
+
+    //Select Difficulty
+    Console.Write("Which difficulty? (easy, medium, hard) -> ");
+    input = Console.ReadLine();
+
+    //Generate Puzzle
+    game.generateNumbers();
+    game.generateTarget(game.difficulties[input]);
+}
+
+//Table
 Table numberTable = new Table();
+
 foreach (var number in game.numbers)
 {
     numberTable.AddColumn(number.Value.ToString());
 }
-numberTable.AddColumn("=");
 
-game.generateTarget(game.difficulties[difficulty]);
+numberTable.AddColumn("=");
 numberTable.AddColumn(game.target.ToString());
 
 //Main Game Loop
