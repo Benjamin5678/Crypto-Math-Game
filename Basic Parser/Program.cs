@@ -8,8 +8,8 @@ Game game = new Game();
 string input;
 
 //Information
-Console.WriteLine("Crypto! Math Game");
-Console.WriteLine("Simply use the symbols below to make the expression true. It's trickier than it looks!\n");
+Console.WriteLine("Crypto! Math Game\n");
+Console.WriteLine("The rules are simple: use the 5 numbers in the given order with the operators below to create an expression that equals the target number.\nIt can be pretty tricky so good luck!\n");
 Console.WriteLine
     ("Operators:\n" +
     "+ | Plus (1 point)\n" +
