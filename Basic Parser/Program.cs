@@ -13,7 +13,7 @@ Console.WriteLine("Simply use the symbols below to make the expression true. It'
 Console.WriteLine
     ("Operators:\n" +
     "+ | Plus (1 point)\n" +
-    "- | Minus (1 point) (Can't be used to negate first number)\n" +
+    "- | Minus (1 point)\n" +
     "* | Multiply (2 points)\n" +
     "/ | Divide (2 points)\n" +
     "L | Divided Into (3 points) | 5 L 10 = 2\n" +
@@ -42,11 +42,10 @@ numberTable.AddColumn("=");
 game.generateTarget(game.difficulties[difficulty]);
 numberTable.AddColumn(game.target.ToString());
 
-AnsiConsole.Write(numberTable);
-
 //Main Game Loop
 while (true)
 {
+    AnsiConsole.Write(numberTable);
     Console.Write("Input an answer: ");
     input = Console.ReadLine();
 
@@ -54,11 +53,11 @@ while (true)
 
     if (correct)
     {
-        Console.WriteLine("Correct!");
+        Console.WriteLine("Congratulations!");
     }
     else
     {
-        Console.WriteLine("Incorrect or already found.");
+        Console.WriteLine("Try again.");
     }
 
     Console.WriteLine($"Solutions found: {game.solutionsFound.Count}");
@@ -68,9 +67,9 @@ while (true)
 }
 
 
-//###Parser Test Code###
+////###Parser Test Code###
 
-//string expr = "2 + 3 _ 2 * 2";
+//string expr = "-2 + 5";
 //Lexer lexer = new Lexer();
 //List<Token> tokens = lexer.tokenize(expr);
 //Parser parser = new Parser(tokens);

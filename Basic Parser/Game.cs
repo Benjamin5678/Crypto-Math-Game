@@ -58,6 +58,7 @@ namespace Basic_Parser
                 {
                     if (numbers.Count < (i + 1) || t.Value != numbers[i].Value)
                     {
+                        Console.WriteLine("The numbers aren't the same.");
                         return false;
                     }
                     i++;
@@ -67,12 +68,16 @@ namespace Basic_Parser
             //Same ammount of numbers?
             if ( i != numbers.Count)
             {
+                Console.WriteLine("The numbers aren't the same.");
                 return false;
             }
+
+            Console.WriteLine($"= {evaluate(tokens)}");
 
             //Evaluation is same?
             if ( evaluate(tokens) != target)
             {
+                Console.WriteLine("Your expression doesnt equal the target.");
                 return false;
             }
 
@@ -84,6 +89,7 @@ namespace Basic_Parser
             foreach (Token solution in solutionsFound)
             {
                 if (BinaryOperator.treeIsEqual(solution, ast)){
+                    Console.WriteLine("You already used this solution.");
                     return false;
                 }
             }

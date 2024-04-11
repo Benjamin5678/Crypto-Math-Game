@@ -133,6 +133,15 @@ namespace Basic_Parser
                 return expr;
             }
 
+            //Negative
+            if (this.current().Type == Token.TokenTypes.Minus)
+            {
+                this.eatToken(Token.TokenTypes.Minus);
+                Token literal = new Token { Type = Token.TokenTypes.Integer, Value = this.current().Value * -1 };
+                this.eatToken(Token.TokenTypes.Integer);
+                return literal;
+            }
+
             throw new Exception("Expected a parenthesis token or an integer");
         }
     }
